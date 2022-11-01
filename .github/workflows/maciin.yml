@@ -1,0 +1,22 @@
+on: 
+  pull_request:
+  push:
+    branches:
+      - main
+      
+
+jobs:
+  tests:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - uses: actions/setup-python@v4
+      - with:
+          python-version: "3.11"
+      
+      - name: Install package and test requirements
+        run: -m pip install .[test]
+      
+      - run: python -m pytest
+        
